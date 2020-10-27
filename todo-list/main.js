@@ -1,18 +1,35 @@
-const inputTodoButton = document.querySelector(".inputTodo");
-// console.log("inputTodoButton:", inputTodoButton);
+const input = document.querySelector("input");
+const button = document.querySelector("button");
+const todoList = document.querySelector(".todo-list");
 
-inputTodoButton.addEventListener("click", function () {
-  const input = document.querySelector("input");
+button.addEventListener("click", () => {
+  if (input.value.trim().length === 0) {
+    return;
+  }
+  const task = input.value;
   const newTask = document.createElement("li");
-  //   newTask.innerHTML = input.value;
-  //   todoList.appendChild(newTask);
-  todoList.innerHTML += `<li class="list-item">${input.value}</li>`;
+  newTask.innerText = task;
+  newTask.onclick = clickHandler;
+  todoList.appendChild(newTask);
   input.value = "";
 });
 
-console.clear();
+function clickHandler(event) {
+  console.log("event:", event);
+  console.log(event.target.innerText);
+  event.target.style.textDecoration = "line-through";
+}
 
-const thatDiv = document.querySelector("div");
-console.log("thatDiv:", thatDiv);
-thatDiv.classList.add("bananas");
-// thatDiv.classList.remove("bananas");
+const allListItems = document.querySelectorAll("li");
+console.log("allListItems:", allListItems);
+allListItems.forEach((li) => {
+  console.log("EXECUTED");
+  li.addEventListener("click", clickHandler);
+});
+
+// click the button
+// eventListener "click"
+// add task to list
+// saving the value of the input and adding to the list
+// clear input
+// input.value = ""
